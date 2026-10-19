@@ -1,0 +1,42 @@
+<view class="page">
+  <view class="card">
+    <view class="row-between">
+      <view>
+        <view class="card-title">队员名册</view>
+        <view class="muted">{{campusName}} · 在编 {{activeCount}} 人 · 停用 {{inactiveCount}} 人</view>
+      </view>
+      <view class="act" bindtap="goImport">导入名单</view>
+    </view>
+    <view class="divider"></view>
+    <view class="muted">停用后的队员不计入未签名单与月度出勤表</view>
+  </view>
+
+  <view wx:if="{{members.length === 0}}" class="empty">
+    还没有队员登记，点右上角「导入名单」批量添加
+  </view>
+
+  <view class="card" wx:for="{{members}}" wx:key="id">
+    <view class="row-between">
+      <view class="member-main">
+        <view class="row">
+          <view class="member-name">{{item.name}}</view>
+          <text class="tag tag-makeup" wx:if="{{item.role === 'captain'}}">队长</text>
+          <text class="tag tag-leave" wx:if="{{item.active === false}}">已停用</text>
+        </view>
+        <view class="muted mt8">
+          {{item.squad || '未填分队'}}
+          <text wx:if="{{item.student_no}}"> · {{item.student_no}}</text>
+          <text wx:if="{{item.campusName}}"> · {{item.campusName}}</text>
+        </view>
+        <view class="muted mt8" wx:if="{{item.login_name}}">登录账号：{{item.login_name}}（初始密码为学号）</view>
+        <view class="muted mt8" wx:if="{{item.phone}}">{{item.phone}}</view>
+      </view>
+    </view>
+    <view class="action-row">
+      <view class="act gray" data-index="{{index}}" bindtap="onResetPassword">重置密码</view>
+      <view class="act {{item.active === false ? '' : 'gray'}}" data-index="{{index}}" bindtap="onToggle">
+        {{item.active === false ? '启用' : '停用'}}
+      </view>
+    </view>
+  </view>
+</view>

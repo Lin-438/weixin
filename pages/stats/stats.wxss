@@ -1,0 +1,86 @@
+.month-picker {
+  padding: 10rpx 24rpx;
+  border-radius: 999rpx;
+  background: #f6f0e6;
+  color: #9a7327;
+  font-size: 26rpx;
+}
+
+.arrow {
+  font-size: 22rpx;
+  opacity: 0.7;
+}
+
+.stat-row {
+  text-align: center;
+}
+
+.stat {
+  flex: 1;
+}
+
+.stat-num {
+  font-size: 38rpx;
+  font-weight: 700;
+}
+
+.stat-num.green {
+  color: #1f9e55;
+}
+
+.stat-num.red {
+  color: #9e1f19;
+}
+
+.table-wrap {
+  margin-top: 16rpx;
+  white-space: nowrap;
+}
+
+.table {
+  display: inline-block;
+  min-width: 100%;
+}
+
+.tr {
+  display: flex;
+  border-bottom: 2rpx solid #ebedf0;
+}
+
+.tr.head {
+  background: #fafbfc;
+  font-size: 24rpx;
+  color: #8a8f99;
+}
+
+.td {
+  width: 110rpx;
+  flex: none;
+  padding: 16rpx 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #1f2329;
+}
+
+.td.name {
+  width: 150rpx;
+  text-align: left;
+  font-weight: 600;
+}
+
+.td.red {
+  color: #9e1f19;
+}
+
+.mt24 {
+  margin-top: 24rpx;
+}
+
+.mt16 {
+  margin-top: 16rpx;
+}
+
+.tips {
+  padding: 0 12rpx 40rpx;
+  text-align: center;
+}

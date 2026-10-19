@@ -1,0 +1,67 @@
+.success-icon {
+  width: 96rpx;
+  height: 96rpx;
+  margin: 0 auto 16rpx;
+  border-radius: 50%;
+  background: #1f9e55;
+  color: #fff;
+  font-size: 52rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-title {
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.fail-title {
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #9e1f19;
+}
+
+.photo-box {
+  margin-top: 24rpx;
+  height: 420rpx;
+  border: 2rpx dashed #c9ced6;
+  border-radius: 16rpx;
+  background: #fafbfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: 420rpx;
+}
+
+.photo-plus {
+  font-size: 72rpx;
+  color: #9e1f19;
+  line-height: 1;
+  margin-bottom: 12rpx;
+}
+
+.retake {
+  color: #9e1f19;
+  font-size: 26rpx;
+}
+
+.mt16 {
+  margin-top: 16rpx;
+}
+
+.tips {
+  margin-top: 24rpx;
+  text-align: center;
+  color: #9e1f19;
+  font-size: 26rpx;
+}

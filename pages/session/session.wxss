@@ -1,0 +1,110 @@
+.qr-card {
+  text-align: center;
+}
+
+.qr-title {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.qr-box {
+  position: relative;
+  margin: 32rpx auto 16rpx;
+  padding: 24rpx;
+  background: #fff;
+  border: 2rpx solid #ebedf0;
+  border-radius: 16rpx;
+  display: inline-block;
+}
+
+.qr-canvas {
+  display: block;
+}
+
+.qr-cover {
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  top: 24rpx;
+  bottom: 24rpx;
+  background: rgba(255, 255, 255, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-cover-text {
+  color: #8a8f99;
+  font-size: 26rpx;
+  margin-bottom: 16rpx;
+}
+
+.qr-cover-btn {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  background: #9e1f19;
+  color: #fff;
+  font-size: 26rpx;
+}
+
+.qr-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rpx;
+}
+
+.qr-refresh {
+  margin-left: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  border: 2rpx solid #9e1f19;
+  color: #9e1f19;
+  font-size: 24rpx;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1f2329;
+}
+
+.stat-num.red {
+  color: #9e1f19;
+}
+
+.signed-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  margin: 0 12rpx 12rpx 0;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  background: rgba(31, 158, 85, 0.1);
+  color: #1f9e55;
+  font-size: 22rpx;
+}
+
+.chip.more {
+  background: #f1f2f4;
+  color: #8a8f99;
+}
+
+.mt24 {
+  margin-top: 24rpx;
+}
+
+.tips {
+  margin-top: 24rpx;
+  text-align: center;
+  color: #9e1f19;
+  font-size: 26rpx;
+}

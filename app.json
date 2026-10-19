@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/record/record",
+    "pages/mine/mine",
+    "pages/login/login",
+    "pages/session/session",
+    "pages/import/import",
+    "pages/checkin/checkin",
+    "pages/detail/detail",
+    "pages/stats/stats",
+    "pages/members/members"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#9E1F19",
+    "navigationBarTitleText": "护卫队训练签到",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F4F5F7"
+  },
+  "tabBar": {
+    "color": "#8A8F99",
+    "selectedColor": "#9E1F19",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "签到"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "text": "记录"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

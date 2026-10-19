@@ -1,0 +1,74 @@
+<view class="page">
+  <view class="card hero-card">
+    <view class="row-between">
+      <view>
+        <view class="hero-name">{{greeting}}，{{identity.name}}</view>
+        <view class="muted">{{identity.campus_name || '未分配校区'}} · {{identity.title || teamName}}</view>
+      </view>
+      <view class="role-tag {{canManage ? 'captain' : ''}}">{{roleText}}</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{isSuper}}">
+    <view class="card-title">查看校区</view>
+    <view class="muted">超级管理员可切换查看三个校区的考勤情况</view>
+    <picker class="mt24" mode="selector" range="{{campusOptions}}" range-key="name" value="{{campusIndex}}" bindchange="onCampusChange">
+      <view class="picker-box">
+        <text>{{campusName || '全部校区'}}</text>
+        <text class="picker-arrow">切换 ▾</text>
+      </view>
+    </picker>
+  </view>
+
+  <block wx:if="{{canManage}}">
+    <view class="card">
+      <view class="card-title">管理操作</view>
+      <view class="muted">当前范围：{{campusName || '全部校区'}}</view>
+      <button class="btn btn-block mt24" bindtap="goCreate">发起签到</button>
+      <button class="btn btn-ghost btn-block mt24" bindtap="goImport">导入成员名单</button>
+      <button class="btn btn-gray btn-block mt24" bindtap="goMembers">队员名册</button>
+    </view>
+  </block>
+
+  <view class="card">
+    <view class="card-title">扫码签到</view>
+    <view class="muted">对准管理员手机上的二维码，扫码后现场拍照即可完成签到</view>
+    <button class="btn btn-block mt24" bindtap="onScan">扫一扫签到</button>
+  </view>
+
+  <view class="card" wx:if="{{openSessions.length > 0}}">
+    <view class="card-title">进行中的签到</view>
+    <view
+      class="session-item"
+      wx:for="{{openSessions}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTapSession"
+    >
+      <view class="row-between">
+        <view class="session-title">{{item.title}}</view>
+        <text class="tag {{item.myStatus === 'none' ? 'tag-absent' : 'tag-normal'}}">{{item.myStatusText}}</text>
+      </view>
+      <view class="muted mt8">
+        {{item.train_date}} · 已签 {{item.signedCount}} 人
+        <text wx:if="{{item.campusName}}"> · {{item.campusName}}</text>
+        <text wx:if="{{canManage}}"> · 点击查看二维码</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="row-between">
+      <view class="card-title">我的近期签到</view>
+      <text class="muted" bindtap="goStats">月度出勤表 ›</text>
+    </view>
+    <view wx:if="{{myRecords.length === 0}}" class="empty">还没有签到记录</view>
+    <view class="record-item" wx:for="{{myRecords}}" wx:key="id">
+      <view class="row-between">
+        <view class="record-title">{{item.sessionTitle}}</view>
+        <text class="tag tag-{{item.status}}">{{item.statusText}}</text>
+      </view>
+      <view class="muted mt8">{{item.trainDate}} {{item.timeText}}</view>
+    </view>
+  </view>
+</view>

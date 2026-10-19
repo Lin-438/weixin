@@ -1,0 +1,97 @@
+<block wx:if="{{mode === 'form'}}">
+  <view class="page">
+    <view class="card">
+      <view class="card-title">发起训练签到</view>
+      <view class="muted">发起后会生成动态二维码，每 60 秒自动刷新一次</view>
+
+      <view class="hr-space"></view>
+
+      <view class="field">
+        <view class="field-label">场次名称</view>
+        <input
+          class="field-input"
+          placeholder="如：周一常规训练"
+          value="{{title}}"
+          bindinput="onInput"
+          data-key="title"
+          maxlength="30"
+        />
+      </view>
+      <view class="field">
+        <view class="field-label">训练日期</view>
+        <picker mode="date" value="{{trainDate}}" bindchange="onDateChange">
+          <view class="field-input">{{trainDate}} {{weekday}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">迟到宽限</view>
+        <input
+          class="field-input"
+          type="number"
+          placeholder="发起后几分钟内算正常，填 0 不判迟到"
+          value="{{lateMinutes}}"
+          bindinput="onInput"
+          data-key="lateMinutes"
+          maxlength="3"
+        />
+      </view>
+    </view>
+
+    <button class="btn btn-block" loading="{{creating}}" disabled="{{creating}}" bindtap="onCreate">
+      生成签到二维码
+    </button>
+    <view class="tips" wx:if="{{error}}">{{error}}</view>
+  </view>
+</block>
+
+<block wx:else>
+  <view class="page qr-page">
+    <view class="card qr-card">
+      <view class="qr-title">{{session.title}}</view>
+      <view class="muted">{{session.train_date}} · 发起后 {{session.lateMinutesText}}</view>
+
+      <view class="qr-box">
+        <canvas
+          canvas-id="qrcode"
+          class="qr-canvas"
+          style="width: {{qrSize}}px; height: {{qrSize}}px;"
+        ></canvas>
+        <view class="qr-cover" wx:if="{{expired}}">
+          <view class="qr-cover-text">二维码已过期</view>
+          <view class="qr-cover-btn" bindtap="onRotate">立即刷新</view>
+        </view>
+      </view>
+
+      <view class="qr-meta">
+        <text class="muted">{{countdown}} 秒后自动刷新</text>
+        <view class="qr-refresh" bindtap="onRotate">{{rotating ? '刷新中' : '手动刷新'}}</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="row-between">
+        <view class="stat">
+          <view class="stat-num">{{signedCount}}</view>
+          <view class="muted">已签到</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num">{{totalCount}}</view>
+          <view class="muted">在编队员</view>
+        </view>
+        <view class="stat">
+          <view class="stat-num red">{{unsignedCount}}</view>
+          <view class="muted">未签到</view>
+        </view>
+      </view>
+      <view class="divider"></view>
+      <view class="signed-list" wx:if="{{recent.length > 0}}">
+        <text class="chip" wx:for="{{recent}}" wx:key="id">{{item.subject_name}}</text>
+        <text class="chip more" wx:if="{{signedCount > recent.length}}">+{{signedCount - recent.length}}</text>
+      </view>
+      <view class="muted" wx:else>还没有队员签到</view>
+    </view>
+
+    <button class="btn btn-block btn-ghost" bindtap="goDetail">查看未签名单 / 补签</button>
+    <button class="btn btn-block btn-gray mt24" bindtap="onClose">结束本场签到</button>
+  </view>
+</block>

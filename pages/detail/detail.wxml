@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="card">
+    <view class="card-title">{{session.title}}</view>
+    <view class="muted">{{session.train_date}} · {{session.statusText}}</view>
+    <view class="divider"></view>
+    <view class="row-between stat-row">
+      <view class="stat">
+        <view class="stat-num">{{totalCount}}</view>
+        <view class="muted">在编</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num green">{{signedCount}}</view>
+        <view class="muted">已签</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num red">{{unsignedCount}}</view>
+        <view class="muted">未签</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{tab === 'signed' ? 'active' : ''}}" data-tab="signed" bindtap="onTab">已签到 {{signedCount}}</view>
+    <view class="tab {{tab === 'unsigned' ? 'active' : ''}}" data-tab="unsigned" bindtap="onTab">未签到 {{unsignedCount}}</view>
+  </view>
+
+  <view class="card" wx:if="{{tab === 'signed'}}">
+    <view wx:if="{{signedList.length === 0}}" class="empty">还没有人签到</view>
+    <view class="member-row" wx:for="{{signedList}}" wx:key="id">
+      <view class="member-main">
+        <view class="row-between">
+          <view class="member-name">{{item.subject_name}}</view>
+          <text class="tag tag-{{item.status}}">{{item.statusText}}</text>
+        </view>
+        <view class="muted mt8">
+          {{item.squad || '未填分队'}}
+          <text wx:if="{{item.student_no}}"> · {{item.student_no}}</text>
+        </view>
+        <view class="muted mt8">{{item.timeText}}<text wx:if="{{item.makeup_by}}"> · 队长补签</text></view>
+      </view>
+      <view class="member-actions" wx:if="{{isCaptain}}">
+        <view class="act" data-index="{{index}}" bindtap="onViewPhoto">照片</view>
+        <view class="act danger" data-id="{{item.id}}" bindtap="onRemove">撤销</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:else>
+    <view wx:if="{{unsignedList.length === 0}}" class="empty">全员已签到</view>
+    <view class="member-row" wx:for="{{unsignedList}}" wx:key="owner_id">
+      <view class="member-main">
+        <view class="member-name">{{item.name}}</view>
+        <view class="muted mt8">
+          {{item.squad || '未填分队'}}
+          <text wx:if="{{item.student_no}}"> · {{item.student_no}}</text>
+        </view>
+      </view>
+      <view class="member-actions" wx:if="{{isCaptain}}">
+        <view class="act" data-index="{{index}}" bindtap="onMakeup">补签</view>
+        <view class="act gray" data-index="{{index}}" bindtap="onLeave">请假</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips muted" wx:if="{{isCaptain}}">补签记录会标记「补签」，与正常扫码签到区分，月底导出时单独统计。</view>
+</view>

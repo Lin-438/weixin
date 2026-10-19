@@ -1,0 +1,86 @@
+<view class="page">
+  <view class="card hero-card">
+    <view class="row-between">
+      <view>
+        <view class="hero-name">{{identity.name || '未绑定身份'}}</view>
+        <view class="muted">
+          {{identity.campus_name || '未分配校区'}}
+          <text wx:if="{{identity.title}}"> · {{identity.title}}</text>
+        </view>
+      </view>
+      <view class="role-tag {{canManage ? 'captain' : ''}}">{{roleText}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="row-between">
+      <view>
+        <view class="card-title">登录账号</view>
+        <view class="muted">账号 {{identity.login_name || '--'}} · 初始密码为本人学号</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="cell" bindtap="goStats">
+      <text>月度出勤表</text>
+      <text class="cell-arrow">›</text>
+    </view>
+    <view class="cell" wx:if="{{canManage}}" bindtap="goMembers">
+      <text>队员名册</text>
+      <text class="cell-arrow">›</text>
+    </view>
+    <view class="cell" wx:if="{{canManage}}" bindtap="goImport">
+      <text>导入成员名单</text>
+      <text class="cell-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">修改密码</view>
+    <input
+      class="code-input"
+      placeholder="原密码（首次为学号）"
+      password="{{true}}"
+      value="{{oldPassword}}"
+      bindinput="onOldInput"
+    />
+    <input
+      class="code-input"
+      placeholder="新密码（至少 4 位）"
+      password="{{true}}"
+      value="{{newPassword}}"
+      bindinput="onNewInput"
+    />
+    <input
+      class="code-input"
+      placeholder="确认新密码"
+      password="{{true}}"
+      value="{{confirmPassword}}"
+      bindinput="onConfirmInput"
+    />
+    <button class="btn btn-block mt24" loading="{{changing}}" disabled="{{changing}}" bindtap="onChangePassword">
+      保存新密码
+    </button>
+    <view class="tips" wx:if="{{pwdError}}">{{pwdError}}</view>
+  </view>
+
+  <view class="card" wx:if="{{isSuper && adminList.length > 0}}">
+    <view class="card-title">管理账号</view>
+    <view class="muted">共 {{adminList.length}} 个账号：2 名超级管理员 + 三校区各 4 名</view>
+    <view class="admin-row" wx:for="{{adminList}}" wx:key="id">
+      <view class="admin-name">{{item.display_name}}</view>
+      <view class="muted">{{item.login_name}} · {{item.campusName}} · {{item.boundText}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">说明</view>
+    <view class="sub mt8">· 签到时间以服务器时间为准，客户端时间仅作参考</view>
+    <view class="sub mt8">· 二维码每 60 秒刷新，截图转发无效</view>
+    <view class="sub mt8">· 队员账号由校区管理员导入名单生成，密码默认为学号</view>
+  </view>
+
+  <view class="hr-space"></view>
+  <button class="btn btn-block btn-gray" bindtap="onLogout">退出登录</button>
+</view>

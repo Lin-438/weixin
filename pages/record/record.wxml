@@ -1,0 +1,57 @@
+<view class="page">
+  <view class="tabs" wx:if="{{isCaptain}}">
+    <view class="tab {{tab === 'sessions' ? 'active' : ''}}" data-tab="sessions" bindtap="onTab">训练场次</view>
+    <view class="tab {{tab === 'mine' ? 'active' : ''}}" data-tab="mine" bindtap="onTab">我的签到</view>
+  </view>
+
+  <block wx:if="{{tab === 'sessions'}}">
+    <view class="card">
+      <view class="card-title">全部训练场次</view>
+      <view class="muted">点击场次查看名单、补签与照片</view>
+    </view>
+
+    <view wx:if="{{sessions.length === 0}}" class="empty">还没有发起过签到</view>
+
+    <view class="card" wx:for="{{sessions}}" wx:key="id">
+      <view class="row-between" data-id="{{item.id}}" bindtap="goDetail">
+        <view class="session-main">
+          <view class="session-title">{{item.title}}</view>
+          <view class="muted mt8">{{item.train_date}} · {{item.statusText}}</view>
+        </view>
+        <view class="session-right">
+          <view class="ratio">{{item.signedCount}}<text class="slash">/{{item.totalCount}}</text></view>
+          <view class="muted mt8">已签 / 在编</view>
+        </view>
+      </view>
+      <view class="divider"></view>
+      <view class="bar">
+        <view class="bar-inner" style="width: {{item.percent}}%"></view>
+      </view>
+      <view class="row-between mt16">
+        <view class="muted">迟到 {{item.lateCount}} · 补签 {{item.makeupCount}} · 请假 {{item.leaveCount}}</view>
+        <view class="link" data-id="{{item.id}}" bindtap="goDetail">查看名单</view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card">
+      <view class="card-title">我的签到记录</view>
+      <view class="muted">共 {{myRecords.length}} 条</view>
+    </view>
+
+    <view wx:if="{{myRecords.length === 0}}" class="empty">还没有签到记录</view>
+
+    <view class="card" wx:for="{{myRecords}}" wx:key="id">
+      <view class="row-between">
+        <view class="session-title">{{item.sessionTitle}}</view>
+        <text class="tag tag-{{item.status}}">{{item.statusText}}</text>
+      </view>
+      <view class="muted mt8">{{item.trainDate}} {{item.timeText}}</view>
+      <view class="muted mt8" wx:if="{{item.makeup_by}}">由队长补签</view>
+    </view>
+  </block>
+
+  <view class="hr-space"></view>
+  <button class="btn btn-block btn-ghost" bindtap="goStats">月度出勤表</button>
+</view>

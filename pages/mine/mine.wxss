@@ -1,0 +1,83 @@
+.hero-card {
+  background: linear-gradient(135deg, #9e1f19, #c8443c);
+}
+
+.hero-name {
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.hero-card .muted {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.role-tag {
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.role-tag.captain {
+  background: #f7dca0;
+  color: #8a3b12;
+  font-weight: 600;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26rpx 0;
+  border-bottom: 2rpx solid #ebedf0;
+  font-size: 28rpx;
+}
+
+.cell:last-child {
+  border-bottom: none;
+}
+
+.cell-arrow {
+  color: #c4c8ce;
+  font-size: 32rpx;
+}
+
+.code-input {
+  margin-top: 24rpx;
+  height: 88rpx;
+  padding: 0 24rpx;
+  border-radius: 12rpx;
+  background: #f6f7f9;
+  font-size: 28rpx;
+}
+
+.mt24 {
+  margin-top: 24rpx;
+}
+
+.mt8 {
+  margin-top: 8rpx;
+}
+
+.tips {
+  margin-top: 20rpx;
+  text-align: center;
+  color: #9e1f19;
+  font-size: 26rpx;
+}
+
+.admin-row {
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid #f2f3f5;
+}
+
+.admin-row:last-child {
+  border-bottom: none;
+}
+
+.admin-name {
+  font-size: 28rpx;
+  color: #1f2329;
+}

@@ -1,0 +1,79 @@
+.hero-card {
+  background: linear-gradient(135deg, #9e1f19, #c8443c);
+}
+
+.hero-name {
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.hero-card .muted {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.role-tag {
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.role-tag.captain {
+  background: #f7dca0;
+  color: #8a3b12;
+  font-weight: 600;
+}
+
+.mt24 {
+  margin-top: 24rpx;
+}
+
+.mt8 {
+  margin-top: 8rpx;
+}
+
+.session-item {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #ebedf0;
+}
+
+.session-item:last-child {
+  border-bottom: none;
+}
+
+.session-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.record-item {
+  padding: 18rpx 0;
+  border-bottom: 2rpx solid #ebedf0;
+}
+
+.record-item:last-child {
+  border-bottom: none;
+}
+
+.record-title {
+  font-size: 28rpx;
+  color: #1f2329;
+}
+
+.picker-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  padding: 0 20rpx;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+
+.picker-arrow {
+  color: #9e1f19;
+  font-size: 24rpx;
+}

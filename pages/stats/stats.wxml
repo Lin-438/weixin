@@ -1,0 +1,70 @@
+<view class="page">
+  <view class="card">
+    <view class="row-between">
+      <view class="card-title">统计月份</view>
+      <picker mode="date" fields="month" value="{{month}}" bindchange="onMonthChange">
+        <view class="month-picker">{{month}} <text class="arrow">切换</text></view>
+      </picker>
+    </view>
+    <view class="divider"></view>
+    <view class="row-between stat-row">
+      <view class="stat">
+        <view class="stat-num">{{overview.sessionCount}}</view>
+        <view class="muted">训练场次</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{overview.memberCount}}</view>
+        <view class="muted">在编队员</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num green">{{overview.rate}}</view>
+        <view class="muted">总出勤率</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num red">{{overview.absentCount}}</view>
+        <view class="muted">缺勤人次</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">出勤概览</view>
+    <view wx:if="{{rows.length === 0}}" class="empty">{{month}} 没有训练场次</view>
+    <scroll-view scroll-x class="table-wrap" wx:else>
+      <view class="table">
+        <view class="tr head">
+          <view class="td name">姓名</view>
+          <view class="td">分队</view>
+          <view class="td">出勤</view>
+          <view class="td">迟到</view>
+          <view class="td">补签</view>
+          <view class="td">请假</view>
+          <view class="td">缺勤</view>
+          <view class="td">出勤率</view>
+        </view>
+        <view class="tr" wx:for="{{rows}}" wx:key="owner_id">
+          <view class="td name">{{item.name}}</view>
+          <view class="td">{{item.squad}}</view>
+          <view class="td">{{item.normal}}</view>
+          <view class="td">{{item.late}}</view>
+          <view class="td">{{item.makeup}}</view>
+          <view class="td">{{item.leave}}</view>
+          <view class="td red">{{item.absent}}</view>
+          <view class="td">{{item.rate}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">导出出勤表</view>
+    <view class="muted">生成的 .csv 文件可直接用 Excel / WPS 打开，也可以转发到微信群</view>
+    <button class="btn btn-block mt24" disabled="{{!hasData}}" bindtap="onExportSummary">导出月度汇总表</button>
+    <button class="btn btn-block btn-ghost mt16" disabled="{{!hasData}}" bindtap="onExportDetail">导出签到明细表</button>
+    <button class="btn btn-block btn-gray mt16" disabled="{{!hasData}}" bindtap="onCopy">复制为表格文本</button>
+  </view>
+
+  <view class="tips muted">
+    汇总表：一人一行，按场次展开后再统计；明细表：一条签到记录一行，含签到时间与记录方式。
+  </view>
+</view>

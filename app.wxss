@@ -1,0 +1,161 @@
+page {
+  --red: #9e1f19;
+  --red-light: #c8443c;
+  --gold: #c9a063;
+  --ink: #1f2329;
+  --ink-2: #5a6472;
+  --ink-3: #8a8f99;
+  --line: #ebedf0;
+  --bg: #f4f5f7;
+  --green: #1f9e55;
+  --orange: #d98a1f;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 28rpx;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+.page {
+  padding: 24rpx 24rpx 40rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(31, 35, 41, 0.05);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8rpx;
+}
+
+.muted {
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.sub {
+  color: var(--ink-2);
+  font-size: 26rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #fff;
+  background: var(--red);
+}
+
+.btn:active {
+  opacity: 0.88;
+}
+
+.btn-ghost {
+  background: #fff;
+  color: var(--red);
+  border: 2rpx solid var(--red);
+}
+
+.btn-gray {
+  background: #f1f2f4;
+  color: var(--ink-2);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  line-height: 34rpx;
+}
+
+.tag-normal {
+  background: rgba(31, 158, 85, 0.12);
+  color: var(--green);
+}
+
+.tag-late {
+  background: rgba(217, 138, 31, 0.14);
+  color: var(--orange);
+}
+
+.tag-leave {
+  background: rgba(90, 100, 114, 0.12);
+  color: var(--ink-2);
+}
+
+.tag-makeup {
+  background: rgba(201, 160, 99, 0.18);
+  color: #9a7327;
+}
+
+.tag-absent {
+  background: rgba(158, 31, 25, 0.12);
+  color: var(--red);
+}
+
+.empty {
+  padding: 80rpx 0;
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 26rpx;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.field-label {
+  width: 180rpx;
+  color: var(--ink-2);
+  font-size: 28rpx;
+}
+
+.field-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--ink);
+}
+
+.divider {
+  height: 2rpx;
+  background: var(--line);
+  margin: 20rpx 0;
+}
+
+.hr-space {
+  height: 24rpx;
+}

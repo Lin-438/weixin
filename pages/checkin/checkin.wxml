@@ -1,0 +1,98 @@
+<view class="page">
+  <block wx:if="{{stage === 'loading'}}">
+    <view class="empty">正在校验二维码…</view>
+  </block>
+
+  <block wx:elif="{{stage === 'failed'}}">
+    <view class="card">
+      <view class="fail-title">无法完成签到</view>
+      <view class="sub mt16">{{failReason}}</view>
+      <view class="divider"></view>
+      <view class="muted">请让队长刷新二维码后重新扫描，或联系队长手动补签。</view>
+    </view>
+    <button class="btn btn-block btn-gray" bindtap="goBack">返回</button>
+  </block>
+
+  <block wx:elif="{{stage === 'signed'}}">
+    <view class="card">
+      <view class="success-icon">✓</view>
+      <view class="success-title">本场已签到</view>
+      <view class="muted">{{session.title}} · {{session.train_date}}</view>
+      <view class="divider"></view>
+      <view class="row-between">
+        <text class="sub">状态</text>
+        <text class="tag tag-{{myRecord.status}}">{{myRecord.statusText}}</text>
+      </view>
+      <view class="row-between mt16">
+        <text class="sub">签到时间</text>
+        <text class="sub">{{myRecord.signedText}}</text>
+      </view>
+    </view>
+    <button class="btn btn-block btn-gray" bindtap="goBack">返回</button>
+  </block>
+
+  <block wx:elif="{{stage === 'done'}}">
+    <view class="card">
+      <view class="success-icon">✓</view>
+      <view class="success-title">签到成功</view>
+      <view class="muted">{{session.title}} · {{session.train_date}}</view>
+      <view class="divider"></view>
+      <view class="row-between">
+        <text class="sub">状态</text>
+        <text class="tag tag-{{result.status}}">{{result.statusText}}</text>
+      </view>
+      <view class="row-between mt16">
+        <text class="sub">记录时间</text>
+        <text class="sub">{{result.signedText}}</text>
+      </view>
+      <view class="row-between mt16">
+        <text class="sub">姓名</text>
+        <text class="sub">{{result.subject_name}}</text>
+      </view>
+    </view>
+    <button class="btn btn-block" bindtap="goBack">完成</button>
+  </block>
+
+  <block wx:else>
+    <view class="card">
+      <view class="card-title">{{session.title}}</view>
+      <view class="muted">{{session.train_date}} · 发起人 {{session.owner_name || '队长'}}</view>
+      <view class="divider"></view>
+      <view class="row-between">
+        <text class="sub">签到人</text>
+        <text class="sub">{{profile.name}}（{{profile.student_no || '未填学号'}}）</text>
+      </view>
+      <view class="row-between mt16">
+        <text class="sub">当前时间</text>
+        <text class="sub">{{nowText}}</text>
+      </view>
+      <view class="row-between mt16">
+        <text class="sub">迟到判定</text>
+        <text class="sub">{{lateHint}}</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">现场拍照</view>
+      <view class="muted">只能调用相机实时拍摄，不能从相册选择</view>
+
+      <view class="photo-box" bindtap="onTakePhoto">
+        <image wx:if="{{photo}}" class="photo" src="{{photo}}" mode="aspectFill" />
+        <block wx:else>
+          <view class="photo-plus">+</view>
+          <view class="muted">点击拍照</view>
+        </block>
+      </view>
+
+      <view class="row-between mt16" wx:if="{{photo}}">
+        <text class="muted">已拍摄，可重新拍摄</text>
+        <text class="retake" bindtap="onTakePhoto">重新拍照</text>
+      </view>
+    </view>
+
+    <button class="btn btn-block" loading="{{submitting}}" disabled="{{submitting}}" bindtap="onSubmit">
+      {{submitting ? '上传中…' : '提交签到'}}
+    </button>
+    <view class="tips" wx:if="{{error}}">{{error}}</view>
+  </block>
+</view>

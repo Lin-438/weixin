@@ -1,0 +1,76 @@
+<view class="page">
+  <view class="card">
+    <view class="card-title">导入校区</view>
+    <picker
+      wx:if="{{canSwitch}}"
+      mode="selector"
+      range="{{campusOptions}}"
+      range-key="name"
+      value="{{campusIndex}}"
+      bindchange="onCampusChange"
+    >
+      <view class="picker-box">
+        <text>{{campusOptions[campusIndex].name || '请选择校区'}}</text>
+        <text class="picker-arrow">切换 ▾</text>
+      </view>
+    </picker>
+    <view wx:else class="picker-box">
+      <text>{{campusOptions[campusIndex].name || '本校区'}}</text>
+    </view>
+    <view class="muted mt8">队员将归属该校区，登录密码默认为本人学号</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">方式一：粘贴名单</view>
+    <view class="muted">从 Excel 复制后直接粘贴，支持 姓名 / 学号 / 分队 / 电话 四列</view>
+    <textarea
+      class="textarea"
+      placeholder="每行一人，用空格或制表符分隔，例如：&#10;张伟 2023010101 一分队 13800000001"
+      value="{{text}}"
+      bindinput="onTextInput"
+      maxlength="-1"
+    />
+    <button class="btn btn-ghost btn-block mt24" bindtap="onParseText">识别名单</button>
+    <view class="muted mt8" bindtap="onCopySample">复制示例格式</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">方式二：上传文件</view>
+    <view class="muted">支持 .xlsx 与 .csv；从微信聊天记录里选择文件即可</view>
+    <button class="btn btn-ghost btn-block mt24" bindtap="onChooseFile">选择文件</button>
+  </view>
+
+  <view class="card" wx:if="{{error}}">
+    <view class="error-text">{{error}}</view>
+  </view>
+
+  <view class="card" wx:if="{{total > 0}}">
+    <view class="row-between">
+      <view class="card-title">导入预览（{{total}} 人）</view>
+      <text class="muted" bindtap="onClear">清空</text>
+    </view>
+    <view class="table-head">
+      <text class="col-name">姓名</text>
+      <text class="col-no">学号</text>
+      <text class="col-login">登录账号</text>
+      <text class="col-act"></text>
+    </view>
+    <view class="table-row" wx:for="{{rows}}" wx:key="index">
+      <text class="col-name">{{item.name}}</text>
+      <text class="col-no">{{item.student_no}}</text>
+      <text class="col-login">{{item.login}}</text>
+      <text class="col-act" data-index="{{index}}" bindtap="onRemoveRow">移除</text>
+    </view>
+    <view class="muted mt8">账号由姓名拼音自动生成，重名会自动加数字后缀；密码为学号</view>
+    <button class="btn btn-block mt24" loading="{{submitting}}" disabled="{{submitting}}" bindtap="onSubmit">
+      确认导入
+    </button>
+  </view>
+
+  <view class="card" wx:if="{{result}}">
+    <view class="card-title">最近一次结果</view>
+    <view class="muted">
+      新增 {{result.inserted}} 人 · 更新 {{result.updated}} 人 · 跳过 {{result.skipped}} 人
+    </view>
+  </view>
+</view>
